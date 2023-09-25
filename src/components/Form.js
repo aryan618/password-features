@@ -49,12 +49,16 @@ const Form = () => {
       setColor('');
     }
   }
+  const handlereset=()=>{
+    
+  }
   return (
     <>
     <form >
     <label htmlFor='password'>password</label>
     <input id='password' type={typepassword} onChange={handlePasswordChange}></input>
     <button onClick={handleclick}>Show/Hide</button>
+    <button onClick={handlereset}>Reset</button>
     </form>
     <br/>
     <br/>

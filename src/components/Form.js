@@ -6,6 +6,7 @@ const Form = () => {
   let [typepassword,setTypepassword]=useState('text');
   const [password,setPassword]=useState('');
   let [strength,setStrength]=useState('');
+  const [color,setColor]=useState('');
   // const handlesubmit=(e)=>{
   //   e.preventDefault();
   //   console.log(`name is ${name}`);
@@ -26,13 +27,26 @@ const Form = () => {
     e.preventDefault();
     const newpassword=e.target.value;
     setPassword(newpassword);
-    if(newpassword.length>5){
-      console.log(`${newpassword} strong`);
-      setStrength('strong');
+    const passRegex=/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$%^&*!])[A-Za-z\d@$%^&*!]+$/;
+    if(passRegex.test(newpassword)){
+      if(newpassword.length>5){
+        console.log(`${newpassword} strong`);
+        setStrength('strong');
+        setColor('green');
+      }
+      else if(newpassword.length>=1){
+        console.log(`${newpassword} weak`);
+        setStrength('weak');
+        setColor('red');
+      }
+      else{
+        setStrength('');
+        setColor('');
+      }
     }
     else{
-      console.log(`${newpassword} weak`);
-      setStrength('weak');
+      setStrength('Invalid');
+      setColor('');
     }
   }
   return (
@@ -45,7 +59,7 @@ const Form = () => {
     <br/>
     <br/>
     <div>
-      password strength {strength}
+      password strength <span style={{color:color}} >{strength}</span>
     </div>
     </>
   )
